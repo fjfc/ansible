@@ -1,0 +1,2 @@
+---
+ntpservers: ["hora.cica.es", "0.es.pool.ntp.org"]

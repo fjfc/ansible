@@ -1,0 +1,6 @@
+---
+  - name: restart ntp
+    service: name=ntp state=restarted
+
+  - name: lanza script
+    script: /root/Enviroment/roles/common/files/script.sh

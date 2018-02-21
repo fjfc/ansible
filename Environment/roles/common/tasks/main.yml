@@ -1,0 +1,27 @@
+---
+# se define la instalación comun del cliente de ntp
+
+- name: instala ntp
+  apt: name={{ item }} state=present update_cache=yes
+  with_items:
+    - ntp
+    - tzdata
+  tags:
+    - ntp-tzdata
+
+- name: añade la configuración
+  template: src=ntp.conf.j2 dest=/etc/ntp.conf
+  notify: restart ntp
+
+- name: Start the ntp service
+  service: name=ntp state=started enabled=yes
+
+- name: instala docker
+  apt: name={{ item }} state=latest update_cache=yes
+  with_items:
+    - apt-transport-https
+    - ca-certificates
+    - curl
+    - gnupg2
+    - software-properties-common
+  notify: lanza script

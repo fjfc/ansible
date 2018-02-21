@@ -1,0 +1,13 @@
+---
+
+  - name: instala ntp
+    hosts: all
+    remote_user: root
+    roles:
+      - common
+
+  - name: instala docker
+    hosts: all
+    remote_user: root
+    roles:
+      - common

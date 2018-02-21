@@ -1,0 +1,10 @@
+#Configuración para todos los nodos de ansible sobre ntp
+
+driftfile /var/lib/ntp/drift
+
+restrict 127.0.0.1
+restrict -6 ::1
+
+{% for ntpservers in ntpservers %}
+server {{ ntpservers }} iburst
+{% endfor %}

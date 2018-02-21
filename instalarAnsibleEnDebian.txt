@@ -1,0 +1,49 @@
+equipo master
+
+cd ~/.ssh
+ssh-keygen
+  nombre.rsa
+
+fichero /etc/ssh/ssh.conf
+
+debajo de la linea
+
+host *
+
+  descomentar
+
+    RSAAuthentication yes
+    PasswordAuthentication yes
+
+  descomentar y modificar
+
+    IdentityFile ~/.ssh/nombre.rsa
+
+fichero /etc/ssh/sshd.conf
+
+  descomentar
+    PermitRootLogin yes
+
+    RSAAuthentication yes
+    PubkeyAuthentication yes
+    AuthorizedKeysFile      %h/.ssh/authorized_keys
+
+/etc/init.d/ssh restart
+
+ssh-copy-id -i ~/.ssh/nombre.rsa root@IP-CLIENTE
+
+equipo cliente
+
+fichero /etc/ssh/sshd.conf
+
+    LoginGraceTime 120
+    PermitRootLogin yes
+    StrictModes yes
+
+    RSAAuthentication yes
+    PubkeyAuthentication yes
+    AuthorizedKeysFile      %h/.ssh/authorized_keys
+
+    RhostsRSAAuthentication yes
+
+/etc/init.d/ssh restart
